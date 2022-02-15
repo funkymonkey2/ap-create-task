@@ -146,13 +146,18 @@ function initializalition () {
     tiles.setTilemap(tilemap`level1`)
     tiles.placeOnRandomTile(mySprite.sprite, sprites.builtin.forestTiles0)
     pause(200)
+    map_list = [
+    tilemap`level1`,
+    tilemap`level2`,
+    tilemap`level8`,
+    tilemap`level9`,
+    tilemap`level7`,
+    tilemap`level4`,
+    tilemap`level10`
+    ]
+    info.setLife(5)
 }
-// lessen lives
-// 
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
-	
-})
-scene.onOverlapTile(SpriteKind.Player, sprites.builtin.coral1, function (sprite, location) {
+function levelSelection () {
     game.splash("nice job, now for the REAL game")
     pause(200)
     game.splash("now, please select a difficulty")
@@ -166,14 +171,26 @@ scene.onOverlapTile(SpriteKind.Player, sprites.builtin.coral1, function (sprite,
     } else {
     	
     }
+}
+function ChangeLevel (num: number) {
+	
+}
+// lessen lives
+// 
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
+    info.changeLifeBy(-1)
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.builtin.coral1, function (sprite, location) {
+    levelSelection()
 })
 function instruction () {
     game.splash("TUTORIAL")
     pause(2000)
-    mySprite.sprite.sayText("use the arrow keys to move left and right, use up to jump", 5000, false)
+    mySprite.sprite.sayText("use the arrow keys to move left and right, use up to jump")
     pause(7000)
 }
 let difficulty_parameter_question = 0
+let map_list: tiles.TileMapData[] = []
 let mySprite: Corgio = null
 initializalition()
 instruction()
